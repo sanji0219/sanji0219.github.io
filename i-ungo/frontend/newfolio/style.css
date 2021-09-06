@@ -1,0 +1,104 @@
+header{
+    height: 84px;
+    background-color: #8a8a8a;
+    position:fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.menubar{
+    width: 65px;
+    height: 84px;
+    float: right;
+}
+.menubar:hover{
+    background-color: #a9a9a9;
+}
+.headmenu{
+    display: none;
+    float: right;
+    background-color: #b8d5f1;
+    width: 250px;
+    height: 242px;
+    margin-top: 84px;
+}
+.headmenu li{
+    margin: 0;
+    height: 46px;
+    list-style: none;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+.headmenu p{
+    background-color: #edf4fc;
+    height: 46px;
+    margin: 0;
+    font-size: 30px;
+    padding-left: 10px;
+}
+.headmenu p:hover{
+    background-color: #b0c4de;
+}
+.inhead{
+    width: 1295px;
+    float:left;
+}
+.fas.fa-bars{
+    color: white;
+    margin:12px;
+    margin-top: 18px;
+}
+.headlogo{
+    height: 84px;
+    display: block;
+    margin:auto;
+}
+.contents{
+    margin-top: 84px;
+    background-color: midnightblue;
+    left: 0;
+}
+.content{
+    height: 600px;
+    padding-top: 27px;
+    padding-left: 130px;
+}
+
+.inner{
+    background-color: white;
+    height: 550px;
+    width: 1207px;
+    padding-left:30px;
+    padding-top:5px;
+    border-radius: 30px;
+    display: none;
+}
+#topbutton{
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0.5;
+    position: fixed;
+    top: 600px;
+    left: 35px;
+    height: 70px;
+    width: 70px;
+    display: none;
+    z-index: 5;
+}
+#topbutton i{
+    margin: 2px 6px;
+    background-color: none;
+}
+.inner.one{
+    display:block;
+}
+footer{
+    height: 300px;
+    background-color: cornflowerblue;
+    padding-top: 27px;
+    padding-left: 130px;
+}
+.foot{
+    height: 270px;
+}

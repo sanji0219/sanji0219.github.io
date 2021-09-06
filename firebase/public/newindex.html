@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>農革[温度,湿度]</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var Config = {
+    apiKey: "AIzaSyCuweAmnX3D20XMzxQnQw6keEajy5NP4wY",
+    authDomain: "testest-686fd.firebaseapp.com",
+    databaseURL: "https://testest-686fd-default-rtdb.firebaseio.com",
+    projectId: "testest-686fd",
+    storageBucket: "testest-686fd.appspot.com",
+    messagingSenderId: "793998805037",
+    appId: "1:793998805037:web:cc8bfc0d00795d0e5850a4",
+    measurementId: "G-54SH47HBKH"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(Config);
+    </script>
+</head>
+
+<body>
+    <main>
+        <div id="chart"></div>
+        <div class="post"><button id="posts">投稿する</button></div>
+        <div><input class="textbox" type="number" id="temperature" placeholder="気温"></div>
+        <div><input class="textbox" type="number" id="humidity" placeholder="湿度"></div>
+        <div><textarea class="textboxes" type="text" id="comment" placeholder="コメントがあれば記入をしてください"></textarea></div>
+        <div id="posts_list"></div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    const database = firebase.database();
+    const ref = database.ref('posts');
+    const arrays=[];
+    const arrays2=[];
+    // 登録処理
+    const postAction = () => {
+        const temperature = $("#temperature").val();
+        const humidity = $("#humidity").val();
+        function LoadProc() {
+            var target = document.getElementById("DateTimeDisp");
+
+            var Year = now.getFullYear();
+            var Month = now.getMonth()+1;
+            var Date = now.getDate();
+
+            return Year + "年" + Month + "月" + Date + "日" ;
+        }
+        const datedate=LoadProc();
+        const comment=$("#comment").val();
+        if (temperature && temperature !== "" && humidity && humidity !== "") {
+            ref.push({
+                temperature: temperature,
+                humidity: humidity,
+                date: datedate,
+                comment:comment,
+            });
+        }
+        // とりあえず登録終わったら空にしとく
+        $("#temperature").val("");
+        $("#humidity").val("");
+        $("#comment").val("");
+    };
+    // 登録時のアクション
+    $('#posts').click(() => postAction());
+
+    // 初期表示と登録後のコールバック
+    ref.on("child_added", (snapshot) => {
+        dispContents({
+            id: snapshot.key,
+            value: snapshot.val()
+        });
+    });
+
+    //TODOを表示する
+    const dispContents = (content) => {
+        //リストの一番上に挿入
+        
+        var array=[tentDate,Number(content.value.temperature),Number(content.value.humidity)]
+        arrays.push(array)
+        var array2=[tentDate,content.value.comment]
+        arrays2.push(array2)
+
+        google.load('visualization', '1', { packages : [ 'corechart' ]});
+        google.setOnLoadCallback(drawChart);
+    
+        $("#posts_list").prepend(`<p>${array2[0]}<br>${array2[1]}</p>`);
+
+    // arrays.forEach(a=>b=`[${a}]`)
+
+        function drawChart(){
+             // 表示するデータの設定
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '日');
+            data.addColumn('number', '気温');
+            //水位に変更
+            data.addColumn('number', '湿度');
+            //気温に変更
+            // data.addColumn('number', '降水量');
+            //降水量に変更
+    
+            data.addRows(arrays);
+
+            // グラフの設定
+            var option = {
+                title: '温度と湿度の推移データ',
+                width: '100%',
+                height:'100%',
+                series: [
+                    { type: 'line', targetAxisIndex: 0 },
+                    { type: 'bars', targetAxisIndex: 1 },
+                ],
+                vAxes: [
+                    { title: '温度(°C)' },
+                    //水位に変更
+                    { title: '湿度(％)' },
+                    //気温に変更
+                    //降水量に変更
+                ]
+            };
+    
+            var chart = new google.visualization.ComboChart(document.getElementById('chart'));
+            chart.draw(data, option);
+            
+        }}    
+</script>
+

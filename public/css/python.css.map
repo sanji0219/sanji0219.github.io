@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,CAAA;EACC,OAAO,EAAC,mBAAmB;EAC3B,gBAAgB,EAAC,IAAI;EACrB,KAAK,EAAC,KAAK;EACX,aAAa,EAAE,GAAG;EAClB,KAAK,EAAC,IAAI;EACV,aAAa,EAAC,GAAG;CACpB;;AACD,AAAA,QAAQ,CAAA;EACJ,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "python.scss"
+    ],
+    "names": [],
+    "file": "python.css"
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>withUto</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+
+    <meta name="google-site-verification" content="Zb5NfTwYxb11wUnv1aPs1i3odp4V53CyDL9oWsh00yg" />
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.9.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.9.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-performance.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyC8g4mt5rVXoDp-dBob2J2ia9b2CPvEcQ8",
+    authDomain: "withuto.firebaseapp.com",
+    databaseURL: "https://withuto-default-rtdb.firebaseio.com",
+    projectId: "withuto",
+    storageBucket: "withuto.appspot.com",
+    messagingSenderId: "15888951408",
+    appId: "1:15888951408:web:b7c032f2e219ba06c2acb5",
+    measurementId: "G-XX15Q4NTN3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+  </head>
+  <body>
+    <header>
+      <a class="logos" href="index.html">
+        <img src="src/logo.png" alt="">
+        <h2>withUto</h2>
+      </a>
+      <div class="bar">
+        <i class="fas fa-bars fa-3x"></i>
+      </div>
+    </header>
+    <div class="ul">
+      <a href="python.html"><p>Pythonのきほん</p></a>
+      <a href="game.html"><p>動体視力ゲーム(笑)</p></a>
+      <a href="timeline.html"><p>タイムライン</p></a>
+      <a href="jinrou.html"><p>人狼(開発中)</p></a>
+      <a href=""><p>開発中</p></a>
+      <a href=""><p>開発中</p></a>
+    </div>
+    <main>
+      <div class="catch">
+        <h3>今できる自分作りと、</h3>
+        <h3 class="next">価値作り</h3>
+        <h4>Make You, and Value</h4>
+      </div>
+      <div class="contents">
+        <div>
+          <h3>動機</h3>
+          <div>
+            <p>自分が夢敗れたときの保険。</br>ついでにお金も稼げたらいいな。</p>
+          </div>
+        </div>
+        <div>
+          <h3>最終の目標</h3>
+          <div>
+            <p>全員でプロダクトを作って、それを収入につなげる。</p>
+          </div>
+        </div>
+        <div>
+          <h3>今後の目標・予定</h3>
+          <ol>
+            <li>全員がPython文法を理解し、数字をいじることが出来るようになる。</li>
+            <li>自分ができることを最大限活用した成果物をそれぞれが作る。(商品価値は求めない)</li>
+            <li>プロダクト、サービスを考える。(Pythonだけで作れるとは限らない)</li>
+          </ol>
+        </div>
+      </div>
+    </main>
+
+  <script src="script/script.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>

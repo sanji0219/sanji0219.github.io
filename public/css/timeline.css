@@ -1,0 +1,78 @@
+main {
+  margin-top: 70px;
+  margin-left: 2vw;
+}
+
+main .textbox {
+  background-color: white;
+  margin-bottom: 5px;
+  position: fixed;
+  top: 51px;
+  left: 0;
+  background-color: white;
+}
+
+main .textbox .txtbox {
+  margin-top: 10px;
+  width: 96vw;
+  padding: 5px 8px;
+  border-radius: 15px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  background-image: none;
+  font-size: 20px;
+  height: 40px;
+  margin-left: 2vw;
+}
+
+main .textbox .txtbox2 {
+  width: 96vw;
+  padding: 5px 8px;
+  border-radius: 15px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  background-image: none;
+  font-size: 20px;
+  height: 100px;
+  margin-left: 2vw;
+}
+
+main .textbox .txtbox3 {
+  width: 30vw;
+  padding: 5px 8px;
+  border-radius: 15px;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  background-image: none;
+  font-size: 20px;
+  height: 40px;
+  margin-left: 2vw;
+}
+
+main #lists {
+  margin-top: 270px;
+}
+
+main #lists .contents {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  width: 96vw;
+  color: #5d627b;
+  background: white;
+  border-top: solid 5px #5d627b;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+main #lists .contents p {
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+/*# sourceMappingURL=timeline.css.map */

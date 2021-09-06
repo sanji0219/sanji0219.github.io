@@ -1,0 +1,96 @@
+html{
+    padding: 0;
+}
+header{
+    width: 100vw;
+    height: 51px;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background-color: white;
+    .logos{
+        img{
+            height: 51px;
+            margin-left:12px;
+            float: left;
+            margin-top: 0;
+        }
+        h2{
+            float: left;
+            margin-left: 50px;
+            font-size: 32px;
+            margin-top:5px ;
+            color: black;
+        }
+    }
+    .bar{
+        float: right;
+        width: 53px;
+        color: black;
+        height: 51px;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        &:active{
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        i{
+            margin: 2px;
+            margin-left:4px;
+            height: 40px;
+        }
+    }
+}
+.ul{
+    position: fixed;
+    list-style: none;
+    background-color: gray;
+    top: 50px;
+    margin: 0;
+    right: 0;
+    margin-top: 5px;
+    display: none;
+    a{
+        p{
+            width: 150px;
+            height: 36px;
+            text-align: center;
+            background-color: white;
+            margin: 1px;
+            margin-top: 0;
+            color: black;
+        }
+    }
+}
+.catch{
+    height: 240px;
+    font-size: 32px;
+    margin-top: 48px;
+    padding-top:80px;
+    background-image: url("src/undraw_creative_team_r90h.png");
+    background-size:contain;
+    background-color:rgba(255,255,255,0.8);
+    background-blend-mode:lighten;
+    background-repeat: no-repeat;
+    background-position: center center;
+    h3{
+        margin: 0;
+    }
+    .next{
+        text-align: right;
+    }
+    h4{
+        font-size: 25px;
+        text-align: center;
+        margin: 0;
+    }
+}
+@media(max-width:1000px){
+    .catch{
+        h3{
+            font-size: 30px;
+        }
+    }
+}

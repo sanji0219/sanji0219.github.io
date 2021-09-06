@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat Sample</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var Config = {
+    apiKey: "AIzaSyCuweAmnX3D20XMzxQnQw6keEajy5NP4wY",
+    authDomain: "testest-686fd.firebaseapp.com",
+    databaseURL: "https://testest-686fd-default-rtdb.firebaseio.com",
+    projectId: "testest-686fd",
+    storageBucket: "testest-686fd.appspot.com",
+    messagingSenderId: "793998805037",
+    appId: "1:793998805037:web:cc8bfc0d00795d0e5850a4",
+    measurementId: "G-54SH47HBKH"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(Config);
+    </script>
+</head>
+
+
+
+<body>
+    <div>
+        <div>
+            <input type="text" id="name" placeholder="投稿者名（必須）" value='ゲストさん'>
+        </div>
+        <div>
+            <textarea id="coment" placeholder="内容（必須）"></textarea>
+        </div>
+        <div>
+            <button id="post">投稿する</button>
+        </div>
+    </div>
+
+    <div id="posts_list"></div>
+</body>
+
+</html>
+
+<script>
+    const database = firebase.database();
+    const ref = database.ref('server/saving-data/fireblog');
+
+    var arrays=[];
+
+    // 登録処理
+    const postAction = () => {
+        const name = $("#name").val();
+        const coment = $("#coment").val();
+        var Year = now.getFullYear();
+        var Month = now.getMonth()+1;
+        var Date = now.getDate();
+        var Hour = now.getHours();
+        var Min = now.getMinutes();
+        var Sec = now.getSeconds();
+
+        var dates = Year + "年" + Month + "月" + Date + "日" + Hour + ":" + Min + ":" + Sec;
+
+        if (name && name !== "" && coment && coment !== ""　&& dates) {
+            ref.push({
+                name: name,
+                coment: coment,
+                date: String(dates),
+            });
+        }
+        // とりあえず登録終わったら空にしとく
+        $("#coment").val("");
+    };
+
+    // 登録時のアクション
+    $('#post').click(() => postAction());
+
+    // 初期表示と登録後のコールバック
+    ref.on("child_added", (snapshot) => {
+        dispContents({
+            id: snapshot.key,
+            value: snapshot.val(),
+        });
+    });
+
+    //TODOを表示する
+    const dispContents = (content) => {
+        //リストの一番上に挿入
+        var array=[content.value.dates,content.value.name,content.value.content];
+        arrays.push(array);
+        $("#posts_list").prepend(`<p>${array[0]}<br>${array[1]}<br>${array[2]}</p>`);
+    }
+
+    
+</script>
+
+<style>
+    .posts {
+        padding: 10px;
+        border: solid 1px;
+    }
+</style>

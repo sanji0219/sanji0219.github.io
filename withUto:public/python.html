@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WithUto python講座</title>
+    <link rel="stylesheet" type="text/css" href="css/python.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+    apiKey: "AIzaSyC8g4mt5rVXoDp-dBob2J2ia9b2CPvEcQ8",
+    authDomain: "withuto.firebaseapp.com",
+    databaseURL: "https://withuto-default-rtdb.firebaseio.com",
+    projectId: "withuto",
+    storageBucket: "withuto.appspot.com",
+    messagingSenderId: "15888951408",
+    appId: "1:15888951408:web:b7c032f2e219ba06c2acb5",
+    measurementId: "G-XX15Q4NTN3"
+};
+  // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+</script>
+
+</head>
+<body>
+    <header>
+        <a class="logos" href="index.html">
+            <img src="src/logo.png" alt="">
+            <h2>withUto</h2>
+        </a>
+        <div class="bar">
+            <i class="fas fa-bars fa-3x"></i>
+        </div>
+    </header>
+    <div class="ul">
+        <a href="python.html"><p>Pythonのきほん</p></a>
+        <a href="game.html"><p>動体視力ゲーム(笑)</p></a>
+        <a href="timeline.html"><p>タイムライン</p></a>
+        <a href="jinrou.html"><p>人狼(開発中)</p></a>
+        <a href=""><p>開発中</p></a>
+        <a href=""><p>開発中</p></a>
+    </div>
+    <div class="wrapper">
+        <div class="python">
+            <h1>Python基本</h1>
+            <div class="step 1">
+                <h3>環境構築</h3>
+                <div class="content 1">
+                    <p class="pre">VScodeで検索、ダウンロード</p>
+                    <p>VScodeというのは、microsoftが提供しているテキストエディタです。テキストエディタというのは、プログラムを書き込む場所です。このHPを書くためにも、htmlとcssという言語を利用していて、そのような言語もそうだし、Pythonもテキストエディタに記入し、読み込ませることで起動します。</p>
+                    <p class="pre">anacondaで検索、ダウンロード</p>
+                    <p>anacondaというのはPythonのパッケージです。Pythonというのはもともと錦蛇という意味で、anacondaというのは大蛇という意味です。つまり、anacondaというのはPythonをよりよく利用するためのパッケージです。その時にpathを通すのを忘れないようにしましょう。そうしないと、VScodeでanacondaを使えません。</p>
+                    <p class="pre">VScode内で、日本語プラグインとPythonプラグインをインストール</p>
+                    <p>日本語プラグインは、私たちがVScodeをより簡単に利用するために良いものなのでインストールすると良いでしょう。Pythonプラグインは、PythonをVScode上で動かすために必要なので入れましょう。</p>
+                </div>
+            </div>
+            <div class="step 2">
+                <h3>基本文法</h3>
+                <div class="content 2">
+                    <p>これより下には、Pythonの基本となる文法を記します。勉強の際や、想起の際に有効活用してください。VScodeでは、記述し、右上の緑矢印を押すことで実行できます。基本文法をコピー、または写すことで身に染み込ませて下さい。暗記は必要ないと思います。</p>
+                    <pre>print("hello")</pre>
+                    <p>これは基本となる関数で、()内の要素を出力するものです。""というのはダブルクォーテーションで、''のシングルクォーテーションでもかまいません。これで、文字や数字を囲むことによってデータを文字型として伝えます。</p>
+                    <pre>print(5)</pre>
+                    <p>次に、""を付けずに出力するものです。前述した文字型とは異なり、数字型として受けます。</p>
+                    <pre>print(5+2)</pre>
+                    <p>数字型の説明です。数字型は、文字型とは異なり、計算を行うことができます。これを動作させると7と出力され、5+2が計算されていることがわかります。</p>
+                    <pre>print("5+2")</pre>
+                    <p>これは、一見計算式に見えますが、文字型として受けているため出力だけで計算はされません。これが、文字型と数字型です。</p>
+                    <pre>print(5-2)</pre>
+                    <pre>print(5*2)</pre>
+                    <pre>print(5/2)</pre>
+                    <pre>print(5%2)</pre>
+                    <p>これが、Pythonにおける四則演算＋αです。四則演算は、自明かと思われますが、%というのは初見かと思います。これは、余剰を表すものです。有効活用すると便利です。</p>
+                    <pre>a=5</pre>
+                    <pre>a=3</pre>
+                    <p>これは、定義文です。前者は、aに5を代入するということを意味します。a=5と書いた後に、後者のように、a=3と書けばその内容は変更されるので、変数と呼ばれます。</p>
+                    <pre>b="hello"</pre>
+                    <p>これは、文字型の定義です。逆に、前述したのは数字型の定義文です。Pythonは、なんの指定もせずに文字型でも数字型でも代入できるため、その数値の扱いは気をつける必要があります。</p>
+                    <pre>c=str(a)</pre>
+                    <pre>d=int(c)</pre>
+                    <p>前者は、すでに数字型が定義されたaをstr()で文字型に直します。後者は、前者で文字型に直したaをint()で数字型に直すというものです。intというのは、正確にいうと整数の形にするもので、例えばint(5/2)は2と同義で、5/2の整数部を示しています。</p>
+                    <pre>if a==3:
+    print("good morning")</pre>
+                    <pre>a==5 and a==6
+    print("hello")</pre>
+                    <pre>else:
+    print("good night")</pre>
+                    <p>これは、条件関数のうちのif文というのものです。条件文は、ifなどの形を示すものと:コロン、条件を満たす時に実行されるコードで構成されます。一文目は基本であるifです。if文では、条件を満たす場合のみif文内のものが実行されます。二文目は、elif文で仕様はif文と同じです。if文の条件を満たしつつ、elif文の条件を満たす場合にはif文内のコードが、条件を満たすelif文が複数ある場合はより先に書いたelif文内のコードが実行されます。その中に含まれてるandというのは「かつ」という意味で、それとは別に「または」の意味を持つorなども入ります。三文目は、else文です。else文は、elif文を含む全ての条件を満たさないときに実行されます。</p>
+                    <pre>while aく10:
+    print("hello"+str(a)
+    a+=1</pre>
+                    <p>これは、条件関数のうちのwhile文というものです。whileと条件と:コロンと条件を満たす時に実行されるコードで構成されていて、これは、条件を満たし続ける限り常に実行するというものです。なので、条件の中に不等号を入れたらコードの最後にa+=1などと書いて回数を指定したりします。</p>
+                    <pre>l=[2,5,9,11]</pre>
+                    <pre>l.append(15)</pre>
+                    <p>これは、listというものです。リストというのは複数の要素を1変数に代入するもので、普通にprint(l)とすると[2, 5, 9, 11]と出力されます。後者は、listの最後尾に要素を追加するというものです。それ以外にもリストをいじる関数はあるので使いたい時に調べて有効活用しましょう。</p>
+                    <pre>for i in l:
+    print(i)</pre>
+                    <pre>for i in range(5):
+    print(i)</pre>
+                    <p>これは、for文です。for文はforと適当な変数とin、それと適当な集合と:コロンと適当な変数を含めた実行されるコードで構成されていて、listなどの集合を順にiに代入して動作します。後者のrange(5)というのは、0,1,2と続く5つの要素という意味で、この場合、0から順に代入され4まで続きます。</p>
+                </div>
+            </div>
+            <div class="step 3">
+                <h3>練習問題</h3>
+                <div class="content 3">
+                    <p>ここで練習問題です。これまでの内容で作れるものになっているので、チャレンジして下さい。最後にprint()で出力するとわかりやすいと思います。</p>
+                    <p class="pre">素数列挙(100まで)　　　ヒント）変数2つ、list1つ、if１つ、while２つを用いて作ることができます。</p>
+                    <p class="pre">素因数分解(xに任意の整数を代入する形で）　　　ヒント）変数x含めて2つ、while1つを用いて作ることができます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+          // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+          // // The Firebase SDK is initialized and available here!
+          //
+          // firebase.auth().onAuthStateChanged(user => { });
+          // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+          // firebase.firestore().doc('/foo/bar').get().then(() => { });
+          // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+          // firebase.messaging().requestPermission().then(() => { });
+          // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+          // firebase.analytics(); // call to activate
+          // firebase.analytics().logEvent('tutorial_completed');
+          // firebase.performance(); // call to activate
+          //
+          // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+            let app = firebase.app();
+            let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+            ].filter(feature => typeof app[feature] === 'function');
+            loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+            console.error(e);
+            loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+        });
+    </script> -->
+</body>
+</html>

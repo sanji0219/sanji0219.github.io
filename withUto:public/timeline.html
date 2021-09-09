@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chat Sample</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/timeline.css">
+
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var Config = {
+    apiKey: "AIzaSyC8g4mt5rVXoDp-dBob2J2ia9b2CPvEcQ8",
+    authDomain: "withuto.firebaseapp.com",
+    databaseURL: "https://withuto-default-rtdb.firebaseio.com",
+    projectId: "withuto",
+    storageBucket: "withuto.appspot.com",
+    messagingSenderId: "15888951408",
+    appId: "1:15888951408:web:b7c032f2e219ba06c2acb5",
+    measurementId: "G-XX15Q4NTN3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(Config);
+    </script>
+</head>
+
+
+
+<body>
+    <header>
+        <a class="logos" href="index.">
+            <img src="src/logo.png" alt="">
+            <h2>withUto</h2>
+        </a>
+        <div class="bar">
+            <i class="fas fa-bars fa-3x"></i>
+        </div>
+    </header>
+    <div class="ul">
+        <a href="python.html"><p>Pythonのきほん</p></a>
+        <a href="game.html"><p>動体視力ゲーム(笑)</p></a>
+        <a href="timeline.html"><p>タイムライン</p></a>
+        <a href="jinrou.html"><p>人狼(開発中)</p></a>
+        <a href=""><p>開発中</p></a>
+        <a href=""><p>開発中</p></a>
+    </div>
+    <main>
+        <div class="textbox">
+            <form>
+                <input class="txtbox" type="text" id="name" placeholder="投稿者名（必須）" value="ゲスト">
+                <textarea class="txtbox2" id="content" placeholder="内容（必須）"></textarea>
+            </form>
+            <div>
+                <button class="txtbox3" id="post">投稿する</button>
+            </div>
+        </div>
+        <div id="lists"></div>
+
+    </main>
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>
+
+<script>
+    const database = firebase.database();
+    const ref = database.ref('posts');
+    // 登録処理
+    const postAction = () => {
+        const name = $("#name").val();
+        const content = $("#content").val();
+
+        var now = new Date();
+        function LoadProc() {
+            // var target = document.getElementById("DateTimeDisp");
+
+            // var Year = now.getFullYear();
+            // var Month = now.getMonth()+1;
+            // var Date = now.getDate();
+            // var Hour = now.getHours();
+            // var Min = now.getMinutes();
+
+            // return Year + "年" + Month + "月" + Date + "日" + Hour + ":" + Min ;
+            return Math.floor(now.getTime()/1000);
+        }
+
+
+
+        if (name && name !== "" && content && content !== "") {
+            ref.push({
+                name: name,
+                content: content,
+                date: LoadProc(),
+            });
+        }
+        // とりあえず登録終わったら空にしとく
+        // $("#name").val("");
+        $("#content").val("");
+        return false;
+    };
+
+    // 登録時のアクション
+    $('#post').click(() => postAction());
+
+    // 初期表示と登録後のコールバック
+    ref.on("child_added", (snapshot) => {
+        dispContents({
+            id: snapshot.key,
+            value: snapshot.val()
+        });
+    });
+
+    //TODOを表示する
+    const dispContents = (content) => {
+        //リストの一番上に挿入
+        var bT=Math.floor(new Date().getTime()/1000)-content.value.date
+        if (bT>=60 & bT<3600){
+            time=Math.floor(bT/60)+"分前";
+        }else if(bT>=3600 & bT<86400){
+            time=Math.floor(bT/3600)+"時間前";
+        }else if(bT>=86400){
+            time=Math.floor(bT/86400)+"日前";
+        }else{
+            time=String(bT+"秒前");
+        }
+        $("#lists").prepend(
+            `<div class="contents" id="${content.id}>
+                    <p class="a">@${content.value.name}<span>　${time}</span></p>
+                    <p>${content.value.content}</p>
+            </div>`
+        );
+    }
+
+    
+</script>
+
+<style>
+    .posts {
+        padding: 10px;
+        border: solid 1px;
+    }
+</style>

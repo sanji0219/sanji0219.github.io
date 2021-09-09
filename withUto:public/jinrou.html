@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>人狼</title>
+    <script defer src="/__/firebase/7.14.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.14.2/firebase-firestore.js"></script>    
+    <script defer src="/__/firebase/init.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <a class="logos" href="">
+        <img src="src/logo.png" alt="">
+        <h2>withUto</h2>
+      </a>
+      <div class="bar">
+        <i class="fas fa-bars fa-3x"></i>
+      </div>
+    </header>
+    <div class="ul">
+      <a href=""><p>Pythonのきほん</p></a>
+      <a href=""><p>動体視力ゲーム(笑)</p></a>
+      <a href=""><p>タイムライン</p></a>
+      <a href=""><p>人狼(開発中)</p></a>
+      <a href=""><p>開発中</p></a>
+      <a href=""><p>開発中</p></a>
+    </div>
+    <main style="margin-top: 70px">
+      <h3>人狼(開発中)</h3>
+      <div class="form">
+        <input type="text" id="server" placeholder="サーバー名">
+        <input type="text" id="name" placeholder="ユーザー名">
+        <input type="text" id="member" placeholder="遊ぶ人数">
+        <button id="button">送信</button>
+      </div>
+      <div id="position">
+        <p class="position"></p>
+      </div>
+      <div class="messages">
+        <p class="error">脱落部分があるので修正してください。</p>
+        <p class="announce">募集を締め切っています</p>
+        <p id="atLeast"></p>
+        <p class="sorry">あなたはこのサーバーで行われているゲームに参加していないようです。</p>
+        <p class="entryCollect">エントリーが完了したのでしばらくお待ちください</p>
+        <p class="entried"></p>
+        <p class="position"></p>
+      </div>
+      <div id="forProfession">
+      </div>
+    </main>
+    <script src="script/script.js"></script>
+    <script>
+      $(()=>{
+        $(".error").hide();
+        $(".announce").hide();
+        $(".sorry").hide()
+        $(".entryCollect").hide();
+        var db = firebase.firestore()
+        var enter=0
+        var loading=0
+        var profession="はにゃ？"
+        var Countday=0
+        const wizard=(survivors)=>{
+          console.log(survivors)
+          $("#forProfession").prepend(`<div id="forWizard"></div>`)
+          var d=0
+          $("#forWizard").prepend("<p>30秒以内に操作を終わらせてください。<br>終わらせなければ、この画面が切り替わります</p>")
+          setTimeout(()=>{
+            $("#forWizard").remove();
+          },30000)
+          survivors.forEach((i)=>{
+            $("#forWizard").prepend(`<button class="choice" value="${String(d)}">${i[1]}</button>`)
+            d+=1
+          })
+          $(".choice").click(()=>{
+          })
+        }
+        const villager=()=>{
+          console.log("hello")
+          $("#forProfession").prepend(`<div id="forVillager"></div>`)
+          $("#forVillager").prepend(`<p>30秒ほど待ってください。役職持ちの人が操作を行なっています。</p>`)
+          setTimeout(()=>{
+            $("#forVillager").remove();
+          },30000)
+        }
+        const wolf=(survivors)=>{
+          $("#forProfession").prepend(`<div id="forWolf"></div>`)
+          var d=0
+          $("#forWolf").prepend("<p>30秒以内に捜査を終わらせてください。<br>終わらせなければ、この画面が切り替わります</p>")
+          setTimeout(()=>{
+            $("#forWolf").remove();
+          },30000)
+          var q=0
+          survivors.forEach((p)=>{
+            $("#forWolf").prepend(`<button class="choiceDead-${String(q)}" onClick="console.log(${p[0]})">${p[1]}</button>`)
+            q+=1
+          })
+        }
+        const day=()=>{
+          Countday++
+          console.log("------------------"+String(Countday)+"日目------------------")
+          var server=String($("#server").val());
+          var name=$("#name").val();
+          db.collection("jinrou").doc("servers").collection(server).where("name", "==", name).get().then((querySnapshot) => {
+            var g=0;
+              querySnapshot.forEach((doc) => {
+                g+=1
+              });
+            if(g==1){
+              db.collection("jinrou").doc("servers").collection(server).get().then((querySnapshot) => {
+                survivors=[];
+                querySnapshot.forEach((doc) => {
+                  survivors.push([doc.id,doc.data().name,doc.data().profession])
+                });
+                if(profession==1){
+                  if(Countday!=1){
+                    wolf(survivors)
+                  }else if(Countday==1){
+                    villager()
+                  }
+                }else if(profession==2){
+                  wizard(survivors)
+                }else{
+                  villager()
+                }
+              })
+              setTimeout(()=>{
+                db.collection("jinrou").doc("servers").collection(server).where("name", "==", name).get().then((querySnapshot) => {
+                  var g=0;
+                  querySnapshot.forEach((doc) => {
+                    g+=1
+                  });
+                  console.log(g)
+                  if(g==1){
+                    $(".messages").prepend(`<p id="meeting">ここから5分間話し合いをしてください<br>と言いつつ、多数決のシステムの作り方がわからないです笑</p>`)
+                    var voted=[];
+                    db.collection("jinrou").doc("servers").collection(server).get().then((querySnapshot) => {
+                      querySnapshot.forEach((doc) => {
+                        voted.push([doc.id,doc.data().name])
+                      });
+                    })
+                    for(var h in voted){
+                      var j=0;
+                      survivors.forEach((i)=>{
+                        $(".forWolf").prepend(`<button id="choiceDead-${String(j)}">${i[1]}</button>`)
+                        j+=1
+                      })
+                    }
+                    setTimeout(()=>{
+                      db.collection("jinrou").doc("servers").collection(server).where("profession", "==", "wolf").get().then((querySnapshot) => {
+                        var s=0
+                        querySnapshot.forEach((doc) => {
+                          s++
+                        })
+                        if(s>=1){
+                          db.collection("jinrou").doc("servers").collection(server).get().then((querySnapshot)=>{
+                            var t=0
+                            querySnapshot.forEach((doc)=>{
+                              t++
+                            })
+                            if(2*s>=t){
+                              $(".messages").prepend("<p>人狼の数が、村人陣営の人数より多いか、等しくなったので人狼陣営の勝利です。</p>")
+                            }else{
+                              day()
+                            }
+                          })
+                        }else{
+                          $(".messages").prepend("<p>人狼がいなくなったので、このゲームは村人陣営の勝利です。</p>")
+                        }
+                      })
+                    },300000)
+                  }else{
+                    $(".messages").prepend("<p>あなたは殺害されました</p>")
+                  }
+                })
+              },33000)
+            }else{
+              $(".messages").prepend("<p>あなたは殺害されました</p>")
+            }
+          })
+        }
+        const firstDecition=()=>{
+          if(profession==1){
+            $(".position").prepend(`あなたは人狼です`)
+          }else if(profession==2){
+            $(".position").prepend(`あなたは占い師です`)
+          }else　if(profession==0){
+            $(".position").prepend(`あなたは村人です`)
+          }
+          $(".announce").fadeOut();
+          day()
+        }
+        const professionDecition=()=>{
+          var name=$("#name").val();
+          var server=$("#server").val();
+          db.collection("jinrou").doc("servers").collection(server).where("name", "==", name).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              var k=doc.id
+              var number=doc.data().number
+              var server=$("#server").val();
+              db.collection("jinrou").doc("servers").collection(server).get().then((querySnapshot) => {
+                memberList=[]
+                querySnapshot.forEach((doc) => {
+                  memberList.push(doc.data().number)
+                })
+                var m=0
+                memberList.forEach((t)=>{
+                  if(t<=number){
+                    m+=1
+                  }
+                })
+                if(m==1){
+                  profession=1
+                  var g="人狼"
+                }else if(m==2){
+                  profession=2
+                  var g="占い師"
+                }else if(m==3){
+                  profession=0
+                  var g="村人"
+                }
+                setTimeout(()=>{
+                  db.collection("jinrou").doc("servers").collection(server).doc(k).set(
+                    {name:name,profession:g}).then(() => {})
+                    firstDecition()
+                },1000)
+              })
+            });
+          })
+        }//////訂正しないと
+        // var jinrouDB = db.collection("test").doc("jinrou");
+        const serchServer=()=>{
+          var loadServer=String($("#server").val());
+          if(loadServer!="" & loading==0){
+            // jinrouDB.collection(loadServer).get().then((doc) => {
+            db.collection("jinrou").doc(loadServer).get().then((doc) => {
+            if (doc.exists) {
+              // jinrouDB.collection(loadServer).get().then((doc)=>{
+              db.collection("jinrou").doc(loadServer).get().then((doc)=>{
+                $("#member").val(doc.data().member);
+                console.log("同じサーバーのデータが見つかったのでメンバー数を表示します。")
+                var collectMember=$("#member").val();
+                db.collection("jinrou").doc("servers").collection(loadServer).onSnapshot((querySnapshot) => {
+                  if(loading==0){
+                    var a=0;
+                    querySnapshot.forEach((doc) => {
+                    a+=1;
+                    if(collectMember<=a){
+                      console.log("メンバーが集まりました")
+                      $(".announce").fadeIn();
+                      $(".form").fadeOut();
+                      $(".error").fadeOut();
+                      $(".entryCollect").fadeOut();
+                      $("#atLeast").fadeOut();
+                      $(".entried").fadeOut()
+                      loading=1
+                      if(enter==1){
+                        professionDecition()
+                      }else if(enter==0){
+                        $(".sorry").fadeIn()
+                      }
+                    }});
+                    var c=collectMember-a;
+                    console.log("あと"+c+"人")
+                    var elem=document.getElementById('atLeast');
+                    elem.innerHTML=`あと${c}人で募集が終了します`;
+                  }
+                });
+              })
+            } else {
+              console.log("同じサーバーのデータはないです");
+            }
+          }).catch((error) => {
+            console.log("Error getting document:", error);
+          });
+          }
+        }
+        $("#server").on("input",serchServer)
+        $("#button").click(()=>{
+          enter=1
+          if($("#server").val()!="" & $("#name").val()!="" & $("#member").val()!=""){
+            var server=String($("#server").val());
+            var number=Math.floor(Math.random()*1000000);
+            var member=String($("#member").val());
+            var name=$("#name").val()
+            db.collection("jinrou").doc("servers").collection(server).doc().set(
+              {name:name,number:number}).then(()=> {});
+            db.collection("jinrou").doc(server).set(
+              {member:member}).then(()=>{})
+            console.log("データを送信しました")
+            $(".entryCollect").fadeIn();
+            $(".entried").prepend(`あなたは${name}という名前でこのサーバーに入室しています`)
+            $(".form").fadeOut();
+            $(".error").fadeOut();
+          }else{
+            console.log("全部の項目を埋めてください")
+            $(".error").fadeIn();
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

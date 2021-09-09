@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+
+</head>
+<body>
+    <header>
+        <a class="logos" href="index.html">
+            <img src="src/logo.png" alt="">
+            <h2>withUto</h2>
+        </a>
+        <div class="bar">
+            <i class="fas fa-bars fa-3x"></i>
+        </div>
+    </header>
+    <div class="ul">
+        <a href="python.html"><p>Pythonのきほん</p></a>
+        <a href="game.html"><p>動体視力ゲーム(笑)</p></a>
+        <a href="timeline.html"><p>タイムライン</p></a>
+        <a href="jinrou.html"><p>人狼(開発中)</p></a>
+        <a href=""><p>開発中</p></a>
+        <a href=""><p>開発中</p></a>
+    </div>
+    <button class="btn">Start</button>
+    <div>
+        <p>Startボタンを押すとカウントダウンの後に円に囲まれた文字が出ます。その円の色の名前と、文字のフォントの色の名前と、書いてある文字を当てるゲームです。</p>
+        <p>色はそれぞれ赤、青、緑、黄、桃、白、紫、橙、黒です。</p>
+        <h1 class="count thr">3</h1>
+        <h1 class="count two">2</h1>
+        <h1 class="count one">1</h1>
+        <h1 class="fir">紫</h1>
+        <h1 class="sec">橙</h1>
+        <h1 class="thi">黒</h1>
+    </div>
+    <div class="answers">
+        <p>さて、どうだったでしょうか。答えをどうぞ。</p>
+        <div>
+            <p class="ans">円の色：</p>
+            <input type="text" class="ans" id="circleone">
+        </div>
+        <div>
+            <p class="ans">フォントの色：</p>
+            <input type="text" class="ans" id="circletwo">
+        </div>
+        <div>
+            <p class="ans">文字：</p>
+            <input type="text" class="ans" id="circlethr">
+        </div>
+        <button class="enter" onclick="good">決定</button>
+    </div>
+    <div class="collect">
+        <p>知らないけど、あってるんじゃないですかね。ナイス！</p>
+    </div>
+    <script src="script/game.js"></script>
+    <script src="script/script.js"></script>
+</body>
+</html>

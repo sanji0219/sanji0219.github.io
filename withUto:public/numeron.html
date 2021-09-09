@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="/__/firebase/7.14.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.14.2/firebase-firestore.js"></script>    
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/4731f42a74.js" crossorigin="anonymous"></script>
+    <title>ヌメロン</title>
+</head>
+<body>
+    <main>
+        <div>
+            <input id="userName" type="text" placeholder="ユーザー名">
+            <input id="opponent" type="text" placeholder="対戦相手のユーザー名">
+            <input id="myNumber" type="text" maxlength="3" placeholder="三桁の数字">
+            <button id="entry">エントリー</button>
+        </div>
+        <div class="announce">
+        </div>
+    </main>
+    <script>
+        $(()=>{
+            var db = firebase.firestore();
+            // const now=new Data().getTime()
+            const findOpponent=()=>{
+                userName=$("#userName").val();
+                if(userName!=""){
+                    db.collection("numeron").where("opponent", "==", userName).onSnapshot((querySnapshot) => {
+                        var opponents=[]
+                        querySnapshot.forEach((doc) => {
+                            // var opponentData=[doc.data().sortNumber,doc.data().name,doc.data().number];
+                            opponents.push(doc.data().opponent);
+                        });
+                        if(opponents.length!=0){
+                            console.log(opponents[opponents.length-1])
+                        }
+                    });
+                }
+            }
+            $("#userName").on("input",findOpponent)
+            const returnNumber=()=>{
+                return Number(Math.floor(Math.random()*1000))
+            }
+            const entried=()=>{
+
+            }
+            $("#entry").click(()=>{
+                if($("#userName").val()!="" & $("#opponent").val()!=""){
+                    var userName=$("#userName").val()
+                    db.collection("numeron").where("opponent", "==", userName).onSnapshot((querySnapshot) => {
+                        var datas=[]
+                        querySnapshot.forEach((doc) => {
+                            datas.push(doc.data().number)
+                        });
+                        if(datas.length!=0){
+                            console.log(datas)
+                        }
+                    });
+                    if($("#myNumber").val()==""){
+                        var myNumber=returnNumber();
+                        $("#myNumber").val(myNumber)
+                    }else{
+                        var myNumber=$("#myNumber").val()
+                    }
+                    var opponent=$("#opponent").val()
+                    var sortNumber=new Date().getTime()
+                    db.collection("numeron").doc().set(
+                        {name:userName,opponent:opponent,number:Number(myNumber)}
+                    ).then(()=> {});
+                    entried()
+                }else{
+                    $(".announce").prepend(`"<p>ユーザー名と対戦相手名を入力してください</p>"`)
+                }
+            })
+        })
+    </script>
+</body>
+</html>
